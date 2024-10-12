@@ -1,13 +1,18 @@
 mod config;
+mod wallpapers_switcher;
 
-use device_query::{DeviceQuery, DeviceState, Keycode};
+use device_query::{DeviceQuery, DeviceState};
+use crate::wallpapers_switcher::WallpapersSwitcher;
 
 fn main() {
+    env_logger::init();
+    log_panics::init();
+
     let device_state = DeviceState::new();
+    let config = config::Config::load("./config.toml").unwrap();
+    let mut switcher = WallpapersSwitcher::from_config(&config).unwrap();
+
     loop {
-        let keys: Vec<Keycode> = device_state.get_keys();
-        for key in keys.iter() {
-            println!("Pressed key: {:?}", key);
-        }
+        switcher.check(&device_state);
     }
 }
