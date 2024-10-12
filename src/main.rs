@@ -1,4 +1,10 @@
-#![windows_subsystem = "windows"]
+#![cfg_attr(
+    all(
+        target_os = "windows",
+        not(feature = "console"),
+    ),
+    windows_subsystem = "windows"
+)]
 
 mod config;
 mod wallpapers_switcher;
