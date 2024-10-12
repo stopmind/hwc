@@ -3,8 +3,14 @@ use std::error::Error;
 use std::fs;
 use serde::{Deserialize};
 
+fn default_true() -> bool {
+    true
+}
+
 #[derive(Deserialize)]
 pub struct Config {
+    #[serde(default="default_true")]
+    pub do_check: bool,
     pub presets: HashMap<String, Preset>
 }
 
