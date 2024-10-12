@@ -1,9 +1,12 @@
+#![windows_subsystem = "windows"]
+
 mod config;
 mod wallpapers_switcher;
 
 use device_query::{DeviceState};
 use log::error;
 use crate::wallpapers_switcher::WallpapersSwitcher;
+
 
 fn main() {
     env_logger::init();
